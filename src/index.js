@@ -1,0 +1,70 @@
+import { fetchBreeds, fetchCatByBreed } from "./cat-api";
+import Notiflix from 'notiflix';
+import SlimSelect from 'slim-select';
+import 'slim-select/dist/slimselect.css';
+
+Notiflix.Notify.init({
+width: '300px',
+position: 'right-top',
+});
+
+selector = document.getElementsByClassName('breed-select');
+divInfoCat = document.getElementsByClassName('cat-info');
+loader = document.getElementsByClassName('loader');
+error = document.getElementsByClassName('error');
+
+loader.style.display = 'none';
+divInfoCat.style.display = 'none';
+error.style.display = 'none';
+
+
+fetchBreeds()
+    .then(breeds => {
+        // Notiflix.Notify.info('Loading data, please wait...');
+        selector.innerHTML = createOptionsList(breeds);
+        new SlimSelect({
+            select: selector,
+        })
+    })
+    .catch((error) => {
+        Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!')
+    })
+    .finally(_ => loader.style.display = 'none');
+
+
+function createOptionsList(breeds) {
+    return breeds
+        .map(breed => `<option value="${breed.id}">${breed.name}</option>`)
+        .join('\n');
+}
+
+selector.addEventListener('change', onSelectBreed);
+
+function onSelectBreed(evt) {
+    Notiflix.Notify.info('Loading data, please wait...');
+    loader.style.display = 'initial';
+    divInfoCat.style.display = 'none';
+    const breedId = evt.currentTarget.value;
+    fetchCatByBreed(breedId)
+        .then(data => {
+        divInfoCat.style.display = 'flex';
+        divInfoCat.innerHTML = createInfoCat(data);   
+        })
+        .catch(error => {
+            divInfoCat.style.display = 'none';
+            console.error(error);
+            Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!');
+        })
+        .finally(_ => loader.style.display = 'none');
+} 
+
+function createInfoCat(data) {
+    const { url, breeds } = data[0];
+    const { name, description, temperament } = breeds[0];
+    return `<img src=${url} alt=${name}>
+            <div>
+               <h1>${name}</h1>
+               <p>${description}</p>
+               <p><span>Temperament:</span>${temperament}</p>
+            </div>`;
+}

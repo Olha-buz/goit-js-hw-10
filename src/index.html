@@ -9,6 +9,12 @@
   </head>
   <body>
     <!-- ❗️❗️❗️ Add partials like so for every page -->
-    <include src="./partials/example.html"></include>
+    <h1>Please, select cat breed!</h1>
+    <select class="breed-select" type="text" name="selectcat" id="selectcat"></select>
+    <p class="loader">Loading data, please wait...</p>
+    <p class="error">Oops! Something went wrong! Try reloading the page!</p>
+    <div class="cat-info">    </div>
+
+    <script type="module" src="./index.js"></script>
   </body>
 </html>
