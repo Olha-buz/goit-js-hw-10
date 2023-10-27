@@ -8,10 +8,10 @@ width: '300px',
 position: 'right-top',
 });
 
-selector = document.getElementsByClassName('breed-select');
-divInfoCat = document.getElementsByClassName('cat-info');
-loader = document.getElementsByClassName('loader');
-error = document.getElementsByClassName('error');
+selector = document.querySelector('.breed-select');
+divInfoCat = document.querySelector('.cat-info');
+loader = document.querySelector('.loader');
+error = document.querySelector('.error');
 
 loader.style.display = 'none';
 divInfoCat.style.display = 'none';
