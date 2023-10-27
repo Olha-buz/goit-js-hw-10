@@ -8,10 +8,10 @@ width: '300px',
 position: 'right-top',
 });
 
-selector = document.querySelector('.breed-select');
-divInfoCat = document.querySelector('.cat-info');
-loader = document.querySelector('.loader');
-error = document.querySelector('.error');
+const selector = document.querySelector('.breed-select');
+const divInfoCat = document.querySelector('.cat-info');
+const loader = document.querySelector('.loader');
+const error = document.querySelector('.error');
 
 loader.style.display = 'none';
 divInfoCat.style.display = 'none';
