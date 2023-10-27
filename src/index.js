@@ -61,7 +61,7 @@ function onSelectBreed(evt) {
 function createInfoCat(data) {
     const { url, breeds } = data[0];
     const { name, description, temperament } = breeds[0];
-    return `<img src=${url} alt=${name}>
+    return `<img src=${url} alt=${name} width="360">
             <div>
                <h1>${name}</h1>
                <p>${description}</p>
