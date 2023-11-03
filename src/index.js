@@ -19,12 +19,13 @@ loader.style.display = 'none';
 fetchBreeds()
     .then(breeds => {
         selector.innerHTML = createOptionsList(breeds);
- 
-    })
-    .then(()=> new SlimSelect({
+        new SlimSelect({
             select: selector,
-           
-        }))
+            settings: {
+                placeholderText: 'Find breed...',
+            }
+        })
+    })
     .catch((error) => {
         Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!', {
             timeout: 5000,
