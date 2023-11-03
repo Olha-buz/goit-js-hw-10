@@ -13,15 +13,11 @@ const divInfoCat = document.querySelector('.cat-info');
 const loader = document.querySelector('.loader');
 const error = document.querySelector('.error');
 
-// loader.style.display = 'none';
-// divInfoCat.style.display = 'none';
-
 error.style.display = 'none';
-
+loader.style.display = 'none';
 
 fetchBreeds()
     .then(breeds => {
-        // Notiflix.Notify.info('Loading data, please wait...');
         selector.innerHTML = createOptionsList(breeds);
         new SlimSelect ({select: selector})
     })
@@ -40,9 +36,8 @@ function createOptionsList(breeds) {
 selector.addEventListener('change', onSelectBreed);
 
 function onSelectBreed(evt) {
-    Notiflix.Notify.info('Loading data, please wait...', {timeout: 1000,});
-    // selector.style.display = 'none'
-    // loader.style.display = 'initial';
+    Notiflix.Notify.info('Loading data, please wait...', { timeout: 1000, });
+    loader.style.display = 'initial';
     divInfoCat.style.display = 'none';
     const breedId = evt.currentTarget.value;
     fetchCatByBreed(breedId)
@@ -52,8 +47,6 @@ function onSelectBreed(evt) {
         })
         .catch(error => {
             divInfoCat.style.display = 'none';
-            // console.log(error);
-            // error.style.display = 'initial';
             Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!',{timeout: 5000});
         })
         .finally(_ => {
