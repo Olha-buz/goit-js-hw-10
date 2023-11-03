@@ -55,6 +55,7 @@ function onSelectBreed(evt) {
         .then(data => {
             divInfoCat.style.display = 'flex';
             divInfoCat.innerHTML = createInfoCat(data);
+            divInfoCat.insertAdjacentHTML('afterbegin', `<option data-placeholder="true"></option>`);
         })
         .catch(error => {
             divInfoCat.style.display = 'none';
