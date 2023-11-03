@@ -19,6 +19,7 @@ loader.style.display = 'none';
 fetchBreeds()
     .then(breeds => {
         selector.innerHTML = createOptionsList(breeds);
+        selector.insertAdjacentElement('afterbegin', `<option data-placeholder="true"></option>`);
     })
     .then(()=> new SlimSelect({
             select: selector,
@@ -55,7 +56,6 @@ function onSelectBreed(evt) {
         .then(data => {
             divInfoCat.style.display = 'flex';
             divInfoCat.innerHTML = createInfoCat(data);
-            divInfoCat.insertAdjacentHTML('afterbegin', `<option data-placeholder="true"></option>`);
         })
         .catch(error => {
             divInfoCat.style.display = 'none';
