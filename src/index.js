@@ -25,12 +25,15 @@ fetchBreeds()
             settings: {
                 alwaysOpen: false,
                 showSearch: true,
-                placeholderText: 'Breed',
+                placeholder: true,
+                placeholderText: 'breed',
                 searchPlaceholder: 'Find breed...'
             }
         }))
     .catch((error) => {
-        Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!', {timeout: 5000})
+        Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!', {
+            timeout: 5000,
+            position: "center-center"})
     })
     .finally(_ => loader.style.display = 'none');
 
@@ -44,7 +47,7 @@ function createOptionsList(breeds) {
 selector.addEventListener('change', onSelectBreed);
 
 function onSelectBreed(evt) {
-    Notiflix.Notify.info('Loading data, please wait...', { timeout: 1000, });
+    // Notiflix.Notify.info('Loading data, please wait...', { timeout: 1000, });
     loader.style.display = 'initial';
     divInfoCat.style.display = 'none';
     const breedId = evt.currentTarget.value;
@@ -55,7 +58,9 @@ function onSelectBreed(evt) {
         })
         .catch(error => {
             divInfoCat.style.display = 'none';
-            Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!',{timeout: 5000});
+            Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!', {
+                timeout: 5000,
+                position: "center-center"});
         })
         .finally(_ => {
             loader.style.display = 'none';
