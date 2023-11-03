@@ -42,20 +42,24 @@ selector.addEventListener('change', onSelectBreed);
 
 function onSelectBreed(evt) {
     Notiflix.Notify.info('Loading data, please wait...');
+    selector.style.display = 'none';
     loader.style.display = 'initial';
     divInfoCat.style.display = 'none';
     const breedId = evt.currentTarget.value;
     fetchCatByBreed(breedId)
         .then(data => {
-        divInfoCat.style.display = 'flex';
-        divInfoCat.innerHTML = createInfoCat(data);   
+            divInfoCat.style.display = 'flex';
+            divInfoCat.innerHTML = createInfoCat(data);
         })
         .catch(error => {
             divInfoCat.style.display = 'none';
-            console.error(error);
+            console.log(error);
             Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!');
         })
-        .finally(_ => loader.style.display = 'none');
+        .finally(_ => {
+            loader.style.display = 'none';
+            selector.style.display = 'flex';
+        })
 } 
 
 function createInfoCat(data) {
