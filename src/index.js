@@ -21,9 +21,6 @@ fetchBreeds()
         selector.innerHTML = createOptionsList(breeds);
         new SlimSelect({
             select: selector,
-            settings: {
-                placeholder: true,
-            }
         })
     })
     .catch((error) => {
