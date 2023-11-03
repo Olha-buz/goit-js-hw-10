@@ -61,7 +61,7 @@ function onSelectBreed(evt) {
         })
         .finally(_ => {
             loader.style.display = 'none';
-            selector.style.display = 'flex';
+
         })
 } 
 
