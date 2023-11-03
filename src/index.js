@@ -45,6 +45,7 @@ selector.addEventListener('change', onSelectBreed);
 function onSelectBreed(evt) {
     // Notiflix.Notify.info('Loading data, please wait...', { timeout: 1000, });
     loader.style.display = 'initial';
+    selector.style.display = 'none';
     divInfoCat.style.display = 'none';
     const breedId = evt.currentTarget.value;
     fetchCatByBreed(breedId)
@@ -60,6 +61,7 @@ function onSelectBreed(evt) {
         })
         .finally(_ => {
             loader.style.display = 'none';
+            selector.style.display = 'initial';
 
         })
 } 
