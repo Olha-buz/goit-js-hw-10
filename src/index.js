@@ -26,7 +26,7 @@ fetchBreeds()
             settings: {
                 alwaysOpen: false,
                 showSearch: true,
-                placeholder: true,
+                
                 placeholderText: 'breed',
                 searchPlaceholder: 'Find breed...'
             }
