@@ -54,6 +54,7 @@ function onSelectBreed(evt) {
         .catch(error => {
             divInfoCat.style.display = 'none';
             console.log(error);
+            error.style.display = 'initial';
             Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!');
         })
         .finally(_ => {
