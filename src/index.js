@@ -5,8 +5,7 @@ import 'slim-select/dist/slimselect.css';
 
 Notiflix.Notify.init({
 width: '300px',
-    position: 'right-top',
-timeout: 2000,
+    position: 'right-top'
 });
 
 const selector = document.querySelector('.breed-select');
@@ -27,7 +26,7 @@ fetchBreeds()
         new SlimSelect ({select: selector})
     })
     .catch((error) => {
-        Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!')
+        Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!', {timeout: 5000})
     })
     .finally(_ => loader.style.display = 'none');
 
@@ -41,7 +40,7 @@ function createOptionsList(breeds) {
 selector.addEventListener('change', onSelectBreed);
 
 function onSelectBreed(evt) {
-    Notiflix.Notify.info('Loading data, please wait...');
+    Notiflix.Notify.info('Loading data, please wait...', {timeout: 1000,});
     // selector.style.display = 'none'
     // loader.style.display = 'initial';
     divInfoCat.style.display = 'none';
@@ -55,7 +54,7 @@ function onSelectBreed(evt) {
             divInfoCat.style.display = 'none';
             // console.log(error);
             // error.style.display = 'initial';
-            Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!');
+            Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!',{timeout: 5000});
         })
         .finally(_ => {
             loader.style.display = 'none';
