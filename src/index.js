@@ -5,7 +5,8 @@ import 'slim-select/dist/slimselect.css';
 
 Notiflix.Notify.init({
 width: '300px',
-position: 'right-top',
+    position: 'right-top',
+timeout: 2000,
 });
 
 const selector = document.querySelector('.breed-select');
@@ -15,17 +16,14 @@ const error = document.querySelector('.error');
 
 // loader.style.display = 'none';
 // divInfoCat.style.display = 'none';
-error.style.display = 'none';
 
-let slim;
+error.style.display = 'none';
 
 
 fetchBreeds()
     .then(breeds => {
         // Notiflix.Notify.info('Loading data, please wait...');
         selector.innerHTML = createOptionsList(breeds);
-    })
-    .then(() => {
         new SlimSelect ({select: selector})
     })
     .catch((error) => {
