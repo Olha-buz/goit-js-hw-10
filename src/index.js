@@ -19,7 +19,7 @@ loader.style.display = 'none';
 fetchBreeds()
     .then(breeds => {
         selector.innerHTML = createOptionsList(breeds);
-        selector.insertAdjacentElement('afterbegin', `<option data-placeholder="true"></option>`);
+        
     })
     .then(()=> new SlimSelect({
             select: selector,
