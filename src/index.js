@@ -16,17 +16,16 @@ const error = document.querySelector('.error');
 loader.style.display = 'none';
 divInfoCat.style.display = 'none';
 error.style.display = 'none';
+selector.style.display = 'none';
 
-let slim = new SlimSelect({
-            select: selector,
-        });
+let slim;
 
 
 fetchBreeds()
     .then(breeds => {
         // Notiflix.Notify.info('Loading data, please wait...');
         selector.innerHTML = createOptionsList(breeds);
-        
+        slim = selector.slim.open();
     })
     .catch((error) => {
         Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!')
@@ -44,7 +43,7 @@ selector.addEventListener('change', onSelectBreed);
 
 function onSelectBreed(evt) {
     Notiflix.Notify.info('Loading data, please wait...');
-    slim.style.display = 'none';
+    slim = selector.slim.close;
     loader.style.display = 'initial';
     divInfoCat.style.display = 'none';
     const breedId = evt.currentTarget.value;
@@ -61,7 +60,7 @@ function onSelectBreed(evt) {
         })
         .finally(_ => {
             loader.style.display = 'none';
-            slim.style.display = 'initial';
+            slim = selector.slim.open();
         })
 } 
 
