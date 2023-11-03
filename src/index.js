@@ -22,7 +22,7 @@ fetchBreeds()
         new SlimSelect({
             select: selector,
             settings: {
-                placeholder: false,
+                placeholder: true,
             }
         })
     })
