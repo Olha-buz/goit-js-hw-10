@@ -14,12 +14,14 @@ const loader = document.querySelector('.loader');
 const error = document.querySelector('.error');
 
 error.style.display = 'none';
+// selector.style.display = 'none';
+let slimSelect;
 
 fetchBreeds()  
     .then(breeds => {
         
         selector.innerHTML = createOptionsList(breeds);
-        new SlimSelect({
+        slimSelect = new SlimSelect({
             select: selector,
             settings: {
                 placeholderText: 'Find breed...',
@@ -33,7 +35,7 @@ fetchBreeds()
     })
     .finally(_ => {
         loader.style.display = 'none';
-        selector.style.display = 'flex'; 
+        // selector.style.display = 'flex'; 
     });
 
 
@@ -48,7 +50,7 @@ selector.addEventListener('change', onSelectBreed);
 
 function onSelectBreed(evt) {
     loader.style.display = 'initial';
-    selector.style.display = 'none';
+    // selector.style.display = 'none';
     divInfoCat.style.display = 'none';
     const breedId = evt.currentTarget.value;
     fetchCatByBreed(breedId)
@@ -65,7 +67,7 @@ function onSelectBreed(evt) {
         })
         .finally(_ => {
             loader.style.display = 'none';
-            selector.style.display = 'flex';
+            // selector.style.display = 'flex';
         })
 } 
 
