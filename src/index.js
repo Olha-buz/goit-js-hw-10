@@ -14,11 +14,10 @@ const loader = document.querySelector('.loader');
 const error = document.querySelector('.error');
 
 error.style.display = 'none';
-loader.style.display = 'none';
 
 fetchBreeds()   // повертає масив порід
     .then(breeds => {
-        selector.style.display = 'flex';  //селект видно
+        
         selector.innerHTML = createOptionsList(breeds);
         new SlimSelect({
             select: selector,
@@ -32,7 +31,10 @@ fetchBreeds()   // повертає масив порід
             timeout: 3000,
             position: "center-center"})
     })
-    .finally(_ => loader.style.display = 'none');
+    .finally(_ => {
+        loader.style.display = 'none';
+        selector.style.display = 'flex'; 
+    });
 
 // створює список в селект для масиву порід, з id та ім'ям
 function createOptionsList(breeds) {
