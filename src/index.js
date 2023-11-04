@@ -16,53 +16,53 @@ const error = document.querySelector('.error');
 error.style.display = 'none';
 loader.style.display = 'none';
 
-fetchBreeds()
+fetchBreeds()   // повертає масив порід
     .then(breeds => {
-        selector.style.display = 'flex';
+        selector.style.display = 'flex';  //селект видно
         selector.innerHTML = createOptionsList(breeds);
         new SlimSelect({
             select: selector,
-            placeholderText: 'Find breed...',
+            settings: {
+                placeholderText: 'Find breed...',
+            }
         })
     })
     .catch((error) => {
         Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!', {
-            timeout: 5000,
+            timeout: 3000,
             position: "center-center"})
     })
     .finally(_ => loader.style.display = 'none');
 
-
+// створює список в селект для масиву порід, з id та ім'ям
 function createOptionsList(breeds) {
     const result = breeds
         .map(breed => `<option value="${breed.id}">${breed.name}</option>`);
     result.unshift(`option data-placeholder="true"></option>`);
-    return result.join('/n');
+    return result.join('');
 }
 
 selector.addEventListener('change', onSelectBreed);
 
 function onSelectBreed(evt) {
-    // Notiflix.Notify.info('Loading data, please wait...', { timeout: 1000, });
     loader.style.display = 'initial';
-
+    selector.style.display = 'none';
     divInfoCat.style.display = 'none';
     const breedId = evt.currentTarget.value;
     fetchCatByBreed(breedId)
         .then(data => {
-            selector.style.display = 'none';
+            selector.style.display = 'flex';
             divInfoCat.style.display = 'flex';
             divInfoCat.innerHTML = createInfoCat(data);
         })
         .catch(error => {
             divInfoCat.style.display = 'none';
             Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!', {
-                timeout: 5000,
+                timeout: 3000,
                 position: "center-center"});
         })
         .finally(_ => {
             loader.style.display = 'none';
-            selector.style.display = 'flex';
         })
 } 
 
