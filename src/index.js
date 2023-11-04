@@ -15,7 +15,7 @@ const error = document.querySelector('.error');
 
 error.style.display = 'none';
 
-fetchBreeds()   // повертає масив порід
+fetchBreeds()  
     .then(breeds => {
         
         selector.innerHTML = createOptionsList(breeds);
@@ -36,7 +36,7 @@ fetchBreeds()   // повертає масив порід
         selector.style.display = 'flex'; 
     });
 
-// створює список в селект для масиву порід, з id та ім'ям
+
 function createOptionsList(breeds) {
     const result = breeds
         .map(breed => `<option value="${breed.id}">${breed.name}</option>`);
@@ -53,7 +53,7 @@ function onSelectBreed(evt) {
     const breedId = evt.currentTarget.value;
     fetchCatByBreed(breedId)
         .then(data => {
-            selector.style.display = 'flex';
+           
             divInfoCat.style.display = 'flex';
             divInfoCat.innerHTML = createInfoCat(data);
         })
@@ -65,6 +65,7 @@ function onSelectBreed(evt) {
         })
         .finally(_ => {
             loader.style.display = 'none';
+            selector.style.display = 'flex';
         })
 } 
 
