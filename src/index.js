@@ -14,7 +14,7 @@ const loader = document.querySelector('.loader');
 const error = document.querySelector('.error');
 
 error.style.display = 'none';
-// selector.style.display = 'none';
+selector.style.display = 'none';
 let slimSelect;
 
 fetchBreeds()  
