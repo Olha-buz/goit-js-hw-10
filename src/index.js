@@ -38,7 +38,7 @@ fetchBreeds()   // повертає масив порід
 function createOptionsList(breeds) {
     const result = breeds
         .map(breed => `<option value="${breed.id}">${breed.name}</option>`);
-    result.unshift(`option data-placeholder="true"></option>`);
+    result.unshift(`<option data-placeholder="true"></option>`);
     return result.join('');
 }
 
