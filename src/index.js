@@ -18,9 +18,11 @@ loader.style.display = 'none';
 
 fetchBreeds()
     .then(breeds => {
+        selector.style.display = 'flex';
         selector.innerHTML = createOptionsList(breeds);
         new SlimSelect({
             select: selector,
+            placeholderText: 'Find breed...',
         })
     })
     .catch((error) => {
@@ -32,9 +34,10 @@ fetchBreeds()
 
 
 function createOptionsList(breeds) {
-    return breeds
-        .map(breed => `<option value="${breed.id}">${breed.name}</option>`)
-        .join('\n');
+    const result = breeds
+        .map(breed => `<option value="${breed.id}">${breed.name}</option>`);
+    result.unshift(`option data-placeholder="true"></option>`);
+    return result.join('/n');
 }
 
 selector.addEventListener('change', onSelectBreed);
@@ -42,10 +45,12 @@ selector.addEventListener('change', onSelectBreed);
 function onSelectBreed(evt) {
     // Notiflix.Notify.info('Loading data, please wait...', { timeout: 1000, });
     loader.style.display = 'initial';
+
     divInfoCat.style.display = 'none';
     const breedId = evt.currentTarget.value;
     fetchCatByBreed(breedId)
         .then(data => {
+            selector.style.display = 'none';
             divInfoCat.style.display = 'flex';
             divInfoCat.innerHTML = createInfoCat(data);
         })
@@ -57,7 +62,7 @@ function onSelectBreed(evt) {
         })
         .finally(_ => {
             loader.style.display = 'none';
-
+            selector.style.display = 'flex';
         })
 } 
 
