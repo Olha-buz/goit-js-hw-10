@@ -18,13 +18,15 @@ let slimSelect;
 
 fetchBreeds()  
     .then(breeds => {
-        selector.innerHTML = createOptionsList(breeds);
-    }).then (()=> slimSelect = new SlimSelect({
+        slimSelect = new SlimSelect({
             select: selector,
+            data: breeds.map(breed => ({value: breed.id, texr:breed.name})),
             settings: {
                 placeholderText: 'Find breed...',
             }
-        }))
+        })
+        // selector.innerHTML = createOptionsList(breeds);
+    })
     .catch((error) => {
         Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!', {
             timeout: 3000,
