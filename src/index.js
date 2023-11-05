@@ -14,19 +14,17 @@ const loader = document.querySelector('.loader');
 const error = document.querySelector('.error');
 
 error.style.display = 'none';
-selector.style.display = 'none';
 let slimSelect;
 
 fetchBreeds()  
     .then(breeds => {
-        
-        selector.innerHTML = createOptionsList(breeds);
         slimSelect = new SlimSelect({
             select: selector,
             settings: {
                 placeholderText: 'Find breed...',
             }
         })
+        selector.innerHTML = createOptionsList(breeds);
     })
     .catch((error) => {
         Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!', {
@@ -67,7 +65,7 @@ function onSelectBreed(evt) {
         })
         .finally(_ => {
             loader.style.display = 'none';
-            // selector.style.display = 'flex';
+            selector.style.display = 'flex';
         })
 } 
 
