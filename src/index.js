@@ -14,18 +14,22 @@ const loader = document.querySelector('.loader');
 const error = document.querySelector('.error');
 
 error.style.display = 'none';
+selector.style.display = 'none';
 let slimSelect;
 
 fetchBreeds()  
     .then(breeds => {
+        
+        selector.innerHTML = createOptionsList(breeds);
+        
+    })
+    .then(() => {
         slimSelect = new SlimSelect({
             select: selector,
-            data: breeds.map(breed => ({value: breed.id, texr:breed.name})),
             settings: {
                 placeholderText: 'Find breed...',
             }
         })
-        // selector.innerHTML = createOptionsList(breeds);
     })
     .catch((error) => {
         Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!', {
@@ -34,7 +38,7 @@ fetchBreeds()
     })
     .finally(_ => {
         loader.style.display = 'none';
-        // selector.style.display = 'flex'; 
+        selector.style.display = 'flex'; 
     });
 
 
@@ -49,7 +53,7 @@ selector.addEventListener('change', onSelectBreed);
 
 function onSelectBreed(evt) {
     loader.style.display = 'initial';
-    // selector.style.display = 'none';
+    selector.style.display = 'none';
     divInfoCat.style.display = 'none';
     const breedId = evt.currentTarget.value;
     fetchCatByBreed(breedId)
